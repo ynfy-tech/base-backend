@@ -1,0 +1,13 @@
+
+
+config:
+  # 是否开启 swagger
+  swaggerEnabled: true
+  # 本地文件路径
+  localPath: /Users/vjf/Projects/idea/logs/base-end
+
+#spring:
+#  profiles:
+#    include:  
+
+

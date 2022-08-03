@@ -1,0 +1,9 @@
+
+
+swagger:
+  enabled: false
+
+spring:
+  profiles:
+    include: application-common, 
+
