@@ -22,6 +22,9 @@ public class RedisJsonSerializer<T> implements RedisSerializer<T> {
 
     public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 
+    // 为 redis 统一添加前缀
+    private final String CACHE_PREFIX = "base_backend:";
+
     private Class<T> clazz;
 
     static {
@@ -43,7 +46,7 @@ public class RedisJsonSerializer<T> implements RedisSerializer<T> {
         if (t == null) {
             return new byte[0];
         }
-        return JSON.toJSONString(t, SerializerFeature.WriteClassName).getBytes(DEFAULT_CHARSET);
+        return JSON.toJSONString(t, SerializerFeature.WriteClassName).replaceFirst(CACHE_PREFIX, "").getBytes(DEFAULT_CHARSET);
     }
 
     @Override
@@ -53,7 +56,7 @@ public class RedisJsonSerializer<T> implements RedisSerializer<T> {
         }
         String str = new String(bytes, DEFAULT_CHARSET);
 
-        return JSON.parseObject(str, clazz);
+        return JSON.parseObject(CACHE_PREFIX + str, clazz);
     }
 
     protected JavaType getJavaType(Class<?> clazz) {

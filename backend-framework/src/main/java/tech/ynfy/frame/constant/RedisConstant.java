@@ -19,6 +19,18 @@ public interface RedisConstant {
      */
     String TEST_DEMO_CACHE = "test:demo";
 
+    /*************************** 重复提交 ****************************/
+
+    /**
+     * 重复时间
+     */
+    Integer REPEAT_TIME_SECOND = 10;
+
+    /**
+     * 重复时间 - Mills
+     */
+    Integer REPEAT_TIME_MILL = REPEAT_TIME_SECOND * 1000;
+
 
 
 }

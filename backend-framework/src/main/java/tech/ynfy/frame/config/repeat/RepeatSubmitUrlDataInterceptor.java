@@ -7,15 +7,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 import tech.ynfy.frame.config.xss.RepeatedlyRequestWrapper;
-import tech.ynfy.frame.constant.RedisConstant;
 import tech.ynfy.frame.util.HttpUtil;
 import tech.ynfy.frame.util.RedisUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 
-import static tech.ynfy.frame.constant.RepeatConstant.REPEAT_TIME_MILL;
-import static tech.ynfy.frame.constant.RepeatConstant.REPEAT_TIME_SECOND;
+import static tech.ynfy.frame.constant.RedisConstant.*;
 
 /**
  * 判断请求url和数据是否和上一次相同，
@@ -29,7 +27,7 @@ public class RepeatSubmitUrlDataInterceptor extends RepeatSubmitInterceptor {
     // 令牌自定义标识
     @Value("${token.header}")
     private String header;
-
+    
     @Autowired
     private RedisUtil redisUtil;
 
@@ -58,12 +56,12 @@ public class RepeatSubmitUrlDataInterceptor extends RepeatSubmitInterceptor {
             submitKey = request.getRequestURI();
         }
         String md5Key = DigestUtils.md5DigestAsHex((submitKey + nowParams).getBytes(StandardCharsets.UTF_8));
-        String cacheRepeatKey = RedisConstant.REPEAT_SUBMIT_KEY + md5Key ;
+        String cacheRepeatKey = REPEAT_SUBMIT_KEY + md5Key ;
         Object redisObj = redisUtil.get(cacheRepeatKey);
         Long nowTime = System.currentTimeMillis();
         if (redisObj != null) {
             Long foreTime = (Long) redisObj;
-            if ((nowTime - foreTime) < (REPEAT_TIME_MILL * 1000)) {
+            if ((nowTime - foreTime) < (REPEAT_TIME_MILL)) {
                 return true;
             }
             return false;
