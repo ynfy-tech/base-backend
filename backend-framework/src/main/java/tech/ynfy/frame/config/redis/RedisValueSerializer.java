@@ -15,15 +15,12 @@ import java.nio.charset.Charset;
 /**
  * Redis使用FastJson序列化
  */
-public class RedisJsonSerializer<T> implements RedisSerializer<T> {
+public class RedisValueSerializer<T> implements RedisSerializer<T> {
     
     @SuppressWarnings("unused")
     private ObjectMapper objectMapper = new ObjectMapper();
 
     public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
-
-    // 为 redis 统一添加前缀
-    private final String CACHE_PREFIX = "base_backend:";
 
     private Class<T> clazz;
 
@@ -31,7 +28,7 @@ public class RedisJsonSerializer<T> implements RedisSerializer<T> {
         ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
     }
 
-    public RedisJsonSerializer(Class<T> clazz) {
+    public RedisValueSerializer(Class<T> clazz) {
         super();
         this.clazz = clazz;
     }
@@ -46,7 +43,7 @@ public class RedisJsonSerializer<T> implements RedisSerializer<T> {
         if (t == null) {
             return new byte[0];
         }
-        return JSON.toJSONString(t, SerializerFeature.WriteClassName).replaceFirst(CACHE_PREFIX, "").getBytes(DEFAULT_CHARSET);
+        return JSON.toJSONString(t, SerializerFeature.WriteClassName).getBytes(DEFAULT_CHARSET);
     }
 
     @Override
@@ -56,7 +53,7 @@ public class RedisJsonSerializer<T> implements RedisSerializer<T> {
         }
         String str = new String(bytes, DEFAULT_CHARSET);
 
-        return JSON.parseObject(CACHE_PREFIX + str, clazz);
+        return JSON.parseObject(str, clazz);
     }
 
     protected JavaType getJavaType(Class<?> clazz) {
