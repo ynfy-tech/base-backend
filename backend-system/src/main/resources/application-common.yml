@@ -5,7 +5,7 @@ server:
   # Tomcat启动初始化的线程数，默认值25
   min-spare-threads: 30
   #服务器的HTTP端口，默认为8080
-  port: 8001
+  port: 8000
   servlet:
     #应用的访问路径
     context-path: /url-shortcut
@@ -14,7 +14,7 @@ server:
     uri-encoding: UTF-8
 
 # Spring配置 
-spring:application-dev.yml
+spring:
   messages:
     # 资源信息 国际化资源文件路径
     basename: i18n/messages
@@ -26,10 +26,56 @@ spring:application-dev.yml
       max-request-size: 20MB
   datasource:
     ##spring数据源配置
-    driver-class-name: org.postgresql.Driver
-    password: ${config.datasource.password}
-    url: jdbc:postgresql://${config.datasource.url}:5432/url_shortcut?setUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=GMT%2B8&tinyInt1isBit=false
-    username: ${config.datasource.username}
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: org.postgresql.Driver
+    druid:
+      # 初始连接数
+      initialSize: 5
+      # 最小连接池数量
+      minIdle: 10
+      # 最大连接池数量
+      maxActive: 20
+      # 配置一个连接在池中最大生存的时间，单位是毫秒
+      maxEvictableIdleTimeMillis: 900000
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置检测连接是否有效
+      testOnBorrow: false
+      testOnReturn: false
+      testWhileIdle: true
+      validationQuery: SELECT 1
+      webStatFilter:
+        enabled: true
+      # 主库数据源
+      master:
+        password: ${config.datasource.password}   
+        url: jdbc:postgresql://${config.datasource.url}:5432/base_backend?setUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=GMT%2B8&tinyInt1isBit=false
+        username: ${config.datasource.username}
+      # 从库数据源开关/默认关闭
+      slave:
+        enabled: false
+        password: ''
+        url: ''
+        username: ''
+      statViewServlet:
+        # 设置白名单，不填则允许所有访问
+        allow: ''
+        url-pattern: /druid/*
+        # 控制台管理用户名和密码
+      # 慢SQL记录
+      filter:
+        stat:
+          enabled: true
+          log-slow-sql: true
+          merge-sql: true
+          slow-sql-millis: 1000
+        wall:
+          config:
+            multi-statement-allow: true
   # redis 配置
   redis:
     # 地址
@@ -88,3 +134,19 @@ ynfy:
     queueCapacity: 100
     # 线程池维护线程所允许的空闲时间
     keepAliveSeconds: 60
+    
+    
+springdoc:
+  api-docs:
+    # 访问路径
+    path: /doc
+    enabled: ${config.swaggerEnabled}
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: ${config.swaggerEnabled}
+  info:
+    version: 1.0.0 - SNAPSHOT
+    title: Spring API
+    desc: sample application
+    license: Apache 2.0
+    url: http://springdoc.org

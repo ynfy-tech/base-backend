@@ -3,7 +3,6 @@ package tech.ynfy.frame.config.repeat;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 import tech.ynfy.frame.config.xss.RepeatedlyRequestWrapper;
@@ -23,10 +22,6 @@ import static tech.ynfy.frame.constant.RedisConstant.*;
  */
 @Component
 public class RepeatSubmitUrlDataInterceptor extends RepeatSubmitInterceptor {
-
-    // 令牌自定义标识
-    @Value("${token.header}")
-    private String header;
     
     @Autowired
     private RedisUtil redisUtil;
@@ -51,7 +46,7 @@ public class RepeatSubmitUrlDataInterceptor extends RepeatSubmitInterceptor {
         }
 
         // 唯一标识（指定key + 消息头） 唯一值（没有消息头则使用请求地址）
-        String submitKey = request.getHeader(header);
+        String submitKey = request.getHeader("URL");
         if (StringUtils.isEmpty(submitKey)) {
             submitKey = request.getRequestURI();
         }

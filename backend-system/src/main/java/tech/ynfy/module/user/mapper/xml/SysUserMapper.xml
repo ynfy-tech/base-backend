@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.ynfy.module.user.mapper.SysUserMapper">
+
+    <select id="pageList" resultType="tech.ynfy.module.user.bean.SysUserListVO">
+        SELECT * FROM sys_user a
+        ${sql}
+        ORDER BY a.create_time DESC
+    </select>
+
+</mapper>
