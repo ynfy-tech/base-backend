@@ -29,10 +29,13 @@
         <commons-io.version>2.11.0</commons-io.version>
         <lombok.version>1.18.24</lombok.version>
         <swagger-springdoc-core.version>1.6.9</swagger-springdoc-core.version>
+        <xiaoming-springdoc-ui.version>4.0.0</xiaoming-springdoc-ui.version>
         <fastjson.version>1.2.83</fastjson.version>
         <hutool.version>5.8.4</hutool.version>
         <druid.version>1.2.11</druid.version>
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
+        <commons-codec.version>1.15</commons-codec.version>
+        <jwt.version>0.11.5</jwt.version>
     </properties>
     
     <dependencyManagement>
@@ -93,5 +96,18 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

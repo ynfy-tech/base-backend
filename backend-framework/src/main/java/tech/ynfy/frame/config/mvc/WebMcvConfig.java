@@ -19,6 +19,7 @@ import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import tech.ynfy.frame.config.auth.RestApiInteceptor;
 import tech.ynfy.frame.config.repeat.RepeatSubmitInterceptor;
 
 import java.nio.charset.StandardCharsets;
@@ -43,6 +44,10 @@ public class WebMcvConfig implements WebMvcConfigurer {
     @Value("${ynfy.path.localPath}")
     private String localPath;
 
+    @Value("${springdoc.api-docs.path}")
+    private String openApiPath;
+
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // 本地文件上传路径
@@ -56,6 +61,12 @@ public class WebMcvConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(repeatSubmitInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(new RestApiInteceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/doc.html",
+                                     openApiPath + "/**",
+                                     "/icbc/client/**"
+                );
     }
 
 //    /**

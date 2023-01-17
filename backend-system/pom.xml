@@ -13,15 +13,19 @@
     <description>业务模块</description>
 
     <dependencies>
-        <dependency>
-            <groupId>tech.ynfy</groupId>
-            <artifactId>backend-common</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>tech.ynfy</groupId>
             <artifactId>backend-framework</artifactId>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons-codec.version}</version>
+        </dependency>
+
     </dependencies>
 
 
@@ -70,17 +74,6 @@
                 </configuration>
             </plugin>
 
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-
             <!--            <plugin>-->
             <!--                <groupId>org.apache.maven.plugins</groupId>-->
             <!--                <artifactId>maven-jar-plugin</artifactId>-->
@@ -105,7 +98,9 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>**/*.yml</include>
+                    <include>**/application.yml</include>
+                    <include>**/application-common.yml</include>
+                    <include>**/application-${profiles.active}.yml</include>
                     <include>**/*.xml</include>
                 </includes>
                 <!-- 这里要设置为true 否则不会扫描yml文件 -->
