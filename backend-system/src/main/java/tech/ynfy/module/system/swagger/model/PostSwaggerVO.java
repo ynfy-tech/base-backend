@@ -1,4 +1,4 @@
-package tech.ynfy.system.swagger.model;
+package tech.ynfy.module.system.swagger.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
