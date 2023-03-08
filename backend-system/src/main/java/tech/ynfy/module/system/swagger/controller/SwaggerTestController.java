@@ -1,12 +1,12 @@
-package tech.ynfy.system.swagger.controller;
+package tech.ynfy.module.system.swagger.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.web.bind.annotation.*;
-import tech.ynfy.system.swagger.model.PostSwaggerDTO;
-import tech.ynfy.system.swagger.model.PostSwaggerVO;
+import tech.ynfy.module.system.swagger.model.PostSwaggerDTO;
+import tech.ynfy.module.system.swagger.model.PostSwaggerVO;
 
 import javax.validation.constraints.NotNull;
 import javax.websocket.server.PathParam;

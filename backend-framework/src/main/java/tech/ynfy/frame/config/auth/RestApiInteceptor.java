@@ -85,12 +85,15 @@ public class RestApiInteceptor extends HandlerInterceptorAdapter {
                 if (redisUtil == null) {
                     redisUtil = SpringUtil.getBean(RedisUtil.class);
                 }
+                // jwt 验证
                 String userId = JwtTokenUtil.getUsernameFromToken(authToken);
+                // redis 二次验证
                 Object object = redisUtil.hget(RedisConstant.USER_KEY, userId);
                 if (ObjectUtil.isEmpty(object) || !authToken.equals(object.toString())) {//过期：redis中不存在过期或者不相等
                     RenderUtil.renderJson(response, Result.authExpire());
                     return false;
                 }
+                // 将 用户信息放入 req
                 request.setAttribute(JwtConstants.CURRENT_USER, userId);
             }
         } catch (JwtException e) {

@@ -40,7 +40,7 @@ public class SwaggerConfig {
     @Bean
     public GroupedOpenApi publicApi() {
         return GroupedOpenApi.builder()
-                             .packagesToScan("tech.ynfy.system.swagger.controller")
+                             .packagesToScan("tech.ynfy.module.system.swagger.controller")
                              .group("spring-public")
                              .addOpenApiMethodFilter(i -> i.isAnnotationPresent(Operation.class))
                              .build();
