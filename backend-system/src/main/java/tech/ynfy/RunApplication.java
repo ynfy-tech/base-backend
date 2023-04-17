@@ -13,7 +13,7 @@ import java.net.UnknownHostException;
 
 @SpringBootApplication
 @Slf4j
-@MapperScan("tech.ynfy.**.mapper")
+@MapperScan(value={"tech.ynfy.module.**.mapper"})
 public class RunApplication {
     
     public static void main(String[] args) throws UnknownHostException {

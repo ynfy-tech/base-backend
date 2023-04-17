@@ -66,13 +66,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- druid -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
-
         <!-- mybatis-plus -->
         <dependency>
             <groupId>com.baomidou</groupId>
