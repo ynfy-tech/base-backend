@@ -24,7 +24,7 @@ public class RunApplication {
         String context = env.getProperty("server.servlet.context-path");
         log.warn("\n----------------------------------------------------------\n\t" +
                 "Application gtkj-Boot is running! Access URLs:\n\t" +
-                "Doc: \t\thttp://" + ip + ":" + port + context + "/swagger-ui.html\n" +
+                "Doc: \t\thttp://" + ip + ":" + port + context + "/doc.html\n" +
                 "----------------------------------------------------------");
 
         log.info("----------@@@@@@@@@@@@@@@@@  启动成功 @@@@@@@@@@@@@ --------------");

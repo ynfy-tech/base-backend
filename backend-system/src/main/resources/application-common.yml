@@ -108,7 +108,7 @@ ynfy:
 springdoc:
   api-docs:
     # 访问路径
-    path: /doc
+    path: /v3/api-docs
     enabled: ${config.swaggerEnabled}
   swagger-ui:
     path: /swagger-ui.html
@@ -119,3 +119,4 @@ springdoc:
     desc: sample application
     license: Apache 2.0
     url: http://springdoc.org
+    
