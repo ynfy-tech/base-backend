@@ -95,13 +95,21 @@
                     <include>**/*.jar</include>
                 </includes>
             </resource>
+            <!-- https://blog.csdn.net/qq_44628595/article/details/109777456 -->
+            <!-- Fix: Cannot invoke "org.apache.ibatis.session.SqlSession.getConfiguration()" because the return value of "org.mybatis.spring.support.SqlSessionDaoSupport.getSqlSession()" 异常 -->
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>**/application.yml</include>
                     <include>**/application-common.yml</include>
                     <include>**/application-${profiles.active}.yml</include>
-                    <include>**/*.xml</include>
                 </includes>
                 <!-- 这里要设置为true 否则不会扫描yml文件 -->
                 <filtering>true</filtering>

@@ -6,7 +6,7 @@ config:
   # redis 配置
   redis:
     # 地址
-    host: localhost
+    host: remoteUrl
     # 密码
     password: 123456
     # 数据库索引
@@ -14,6 +14,11 @@ config:
     # 端口，默认为6379
     port: 6379
   datasource:
-    password: peak1203
-    url: localhost
+    password: postgres
+    url: remoteUrl
     username: postgres
+    
+mybatis-plus:
+  configuration:
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
