@@ -113,7 +113,6 @@ public class ReflectUtil {
                     String fieldName = field.getName();
                     String fieldSqlName = tableAlias + camelToUnderline(fieldName);
                     Class fieldClass = field.getType();
-                    System.out.println(fieldClass.getName());
                     if ("java.lang.String".equals(fieldClass.getName())) {
                         // 字符串
                         tempSql = String.format(" (%s LIKE '%s%%') ", fieldSqlName, filedValue);

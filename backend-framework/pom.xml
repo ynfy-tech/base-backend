@@ -83,7 +83,7 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>${springdoc-openapi-ui.version}</version>
+            <version>${swagger-springdoc-core.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.webjars</groupId>

@@ -110,11 +110,15 @@
                     <include>**/application.yml</include>
                     <include>**/application-common.yml</include>
                     <include>**/application-${profiles.active}.yml</include>
+                    <!-- 其他文件 -->
+                    <!--<include>**</include>-->
                 </includes>
                 <!-- 这里要设置为true 否则不会扫描yml文件 -->
                 <filtering>true</filtering>
             </resource>
         </resources>
+        
+        
 
     </build>
 
