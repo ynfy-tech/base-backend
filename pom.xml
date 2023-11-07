@@ -26,7 +26,7 @@
         <maven.compiler.target>18</maven.compiler.target>
         <ynfy.version>1.0.0-SNAPSHOT</ynfy.version>
         <commons-io.version>2.11.0</commons-io.version>
-        <lombok.version>1.18.24</lombok.version>
+        <lombok.version>1.18.30</lombok.version>
         <swagger-springdoc-core.version>1.6.14</swagger-springdoc-core.version>
         <xiaoming-springdoc-ui.version>4.1.0</xiaoming-springdoc-ui.version>
         <fastjson.version>1.2.83</fastjson.version>
